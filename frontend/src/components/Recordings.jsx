@@ -4,7 +4,9 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { toast } from "react-hot-toast";
 
+
 export default function Recordings() {
+    const API_URL = import.meta.env.VITE_API_URL;
   const [recordings, setRecordings] = useState([]);
   const location = useLocation();
 
@@ -12,7 +14,11 @@ export default function Recordings() {
     const fetchRecordings = async () => {
       const userId = localStorage.getItem("userId");
       try {
-        const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings?userId=${userId}`);
+        const res = await fetch(`${API_URL}/recordings?userId=${userId}`,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
         const data = await res.json();
         if (data.success) setRecordings(data.recordings);
       } catch (err) {
@@ -28,7 +34,7 @@ export default function Recordings() {
     if (!window.confirm("Are you sure you want to delete this recording?")) return;
 
     try {
-      const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_URL}/recordings/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
         setRecordings((prev) => prev.filter((rec) => rec._id !== id));
@@ -45,7 +51,7 @@ export default function Recordings() {
 
     const userId = localStorage.getItem("userId");
     try {
-      const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings?userId=${userId}`, { method: "DELETE" });
+      const res = await fetch(`${API_URL}/recordings?userId=${userId}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
         setRecordings([]);

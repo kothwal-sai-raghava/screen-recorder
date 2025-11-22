@@ -10,10 +10,12 @@ export default function App() {
   const [view, setView] = useState("login"); // login | register
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) navigate("/home", { replace: true });
-  }, []);
+  }, []); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,9 +32,8 @@ export default function App() {
 
     try {
       const endpoint =
-        view === "login"
-          ? "https://screen-recorder-npz4.onrender.com/api/auth/login"
-          : "https://screen-recorder-npz4.onrender.com/api/auth/register";
+        view === "login" ? 
+          `${API_URL}/auth/login` : `${API_URL}/auth/register`;
 
       const body =
         view === "login"
@@ -44,7 +45,7 @@ export default function App() {
       if (res.data.success) {
         setMessage("Success");
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("userId", res.data.user?.id);
         if (view === "login") navigate("/home", { replace: true });
       } else setMessage(res.data.message);
     } catch (err) {

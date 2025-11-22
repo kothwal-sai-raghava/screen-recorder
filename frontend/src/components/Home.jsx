@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import toast from "react-hot-toast";
 
 export default function Home() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const chunksRef = useRef([]);
@@ -71,9 +72,12 @@ export default function Home() {
     chunksRef.current = [];
 
     try {
-      const res = await fetch("https://screen-recorder-npz4.onrender.com/api/recordings", {
+      const res = await fetch(`${API_URL}/recordings`, {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       const data = await res.json();
       if (data.success) toast.success("Recording saved!");
