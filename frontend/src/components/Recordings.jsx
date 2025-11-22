@@ -12,7 +12,7 @@ export default function Recordings() {
     const fetchRecordings = async () => {
       const userId = localStorage.getItem("userId");
       try {
-        const res = await fetch(`http://localhost:5000/api/recordings?userId=${userId}`);
+        const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings?userId=${userId}`);
         const data = await res.json();
         if (data.success) setRecordings(data.recordings);
       } catch (err) {
@@ -28,7 +28,7 @@ export default function Recordings() {
     if (!window.confirm("Are you sure you want to delete this recording?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/recordings/${id}`, { method: "DELETE" });
+      const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
         setRecordings((prev) => prev.filter((rec) => rec._id !== id));
@@ -45,7 +45,7 @@ export default function Recordings() {
 
     const userId = localStorage.getItem("userId");
     try {
-      const res = await fetch(`http://localhost:5000/api/recordings?userId=${userId}`, { method: "DELETE" });
+      const res = await fetch(`https://screen-recorder-npz4.onrender.com/api/recordings?userId=${userId}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
         setRecordings([]);
@@ -93,7 +93,7 @@ export default function Recordings() {
 
                 {/* Video */}
                 <video
-                  src={`http://localhost:5000/api/recordings/${rec._id}`}
+                  src={`https://screen-recorder-npz4.onrender.com/api/recordings/${rec._id}`}
                   controls
                   className="w-full rounded-lg max-h-[250px] sm:max-h-[300px] md:max-h-[250px] lg:max-h-[200px] object-cover"
                 />

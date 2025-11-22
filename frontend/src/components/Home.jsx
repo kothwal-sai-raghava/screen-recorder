@@ -71,7 +71,7 @@ export default function Home() {
     chunksRef.current = [];
 
     try {
-      const res = await fetch("http://localhost:5000/api/recordings", {
+      const res = await fetch("https://screen-recorder-npz4.onrender.com/api/recordings", {
         method: "POST",
         body: formData,
       });

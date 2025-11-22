@@ -31,8 +31,8 @@ export default function App() {
     try {
       const endpoint =
         view === "login"
-          ? "http://localhost:5000/api/auth/login"
-          : "http://localhost:5000/api/auth/register";
+          ? "https://screen-recorder-npz4.onrender.com/api/auth/login"
+          : "https://screen-recorder-npz4.onrender.com/api/auth/register";
 
       const body =
         view === "login"
