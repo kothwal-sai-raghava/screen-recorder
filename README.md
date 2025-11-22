@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     # Screen Recorder MERN Application
 
 A professional **screen recording web application** built with the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can record their screen, save videos, and manage their recordings securely with authentication.
@@ -43,3 +44,6 @@ A professional **screen recording web application** built with the MERN stack (M
 ```bash
 git clone <your-repo-url>
 cd <repo-folder>
+=======
+# screen-recorder
+>>>>>>> b7580c108500416d41949d7dd1f3eeea4cd8ed82
